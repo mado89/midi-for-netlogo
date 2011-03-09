@@ -1,0 +1,411 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<title>
+      NetLogo 4.1.1 User Manual: Midi Extension
+    </title>
+    <link rel="stylesheet" href="midi-Dateien/netlogo.css" type="text/css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head><body><h1>
+      Midi Extension
+    </h1>
+    <p>
+      The Midi Extension for NetLogo provides primitives to add sound to
+      NetLogo models. It supports full access to the MIDI interface.
+    </p><h2>
+      Using the Midi Extension
+    </h2>
+    <p>
+    	TODO: wie installieren?
+      <!-- The sound extension comes preinstalled. To use the extension in your
+      model, add a line to the top of your procedures tab: -->
+    </p><pre>extensions [midi]
+</pre>
+    <p>
+      If your model already uses other extensions, then it already has an
+      <a href="http://ccl.northwestern.edu/netlogo/docs/dictionary.html#extensions"><tt>extensions</tt></a> line in
+      it, so just add <tt>midi</tt> to the list.
+    </p><p>
+      For more information on using NetLogo extensions, see the <a href="http://ccl.northwestern.edu/netlogo/docs/extensions.html">Extensions Guide</a>.
+    </p><p>
+      For examples that use the sound extension, see the Sound section
+      under Code Examples in the NetLogo Models Library.
+    </p><h2>
+      MIDI support
+    </h2>
+    <!-- <p>
+      The MIDI part simulates a 128-key electronic keyboard with <a href="#drumnames">47 drums</a> and <a href="#instrumentnames">128 melodic
+      instruments</a>, as provided by <a href="http://www.midi.org/about-midi/gm/gm1_spec.shtml">General MIDI Level
+      1 specification</a>.
+    </p><p>
+      It supports 15 polyphonic instrument channels and a single percussion
+      channel. Using more than 15 different melodic instruments
+      simultaneously in a model will cause some sounds to be lost or cut
+      off.
+    </p><p>
+      The pitch of a melodic instrument is specified by a key number. The
+      keys on the keyboard are numbered consecutively from 0 to 127, where
+      0 is the left-most key. Middle C is key number 60.
+    </p><p>
+      The loudness of an instrument is specified by a velocity, which
+      represents the force with which the keyboard key is depressed.
+      Velocity ranges from 0 to 127, where 64 is the standard velocity. A
+      higher velocity results in a louder sound.
+    </p> -->
+    <h2>
+      Primitives
+    </h2>
+    <p>
+      <a href="#midi:noteon">midi:noteon</a> <a href="#midi:noteoff">midi:noteoff</a> <a href="#midi:note">midi:note</a> <a href="#midi:instrument">midi:instrument</a> <a href="#midi:pitch.bend">midi:pitch.bend</a> <a href="#midi:controller">midi:controller</a> <a href="#midi:key.pressure">midi:key.pressure</a> <a href="#midi:channel.pressure">midi:channel.pressure</a> <a href="#midi:volume">midi:volume</a> <a href="#midi:expression">midi:expression</a> <a href="#midi:modulation">midi:modulation</a> <a href="#midi:pan">midi:pan</a>
+      <a href="#midi:sustain">midi:sustain</a> <a href="#midi:reverb">midi:reverb</a> <a href="#midi:chrous">midi:chorus</a> <a href="#midi:portamento.time">midi:portamento.time</a> <a href="#midi:portamento">midi:portamento</a> <a href="#midi:portamento.from">midi:portamento.from</a> <a href="#midi:rpn">midi:rpn</a> <a href="#midi:nrpn">midi:nrpn</a> <a href="#midi:reset.controllers">midi:reset.controllers</a> <a href="#midi:pitch.sens">midi:pitch.sens</a> <a href="#midi:mastertune.coarse">midi:mastertune.coarse</a> <a href="#midi:mastertune.fine">midi:mastertune.fine</a> <a href="#midi:panic">midi:panic</a>
+    </p><h3>
+      <a name="midi:noteon" id="midi:noteon">midi:noteon</a>
+    </h3>
+    <h4>
+      midi:noteon <i>channel</i> <i>note</i> <i>volume</i>
+    </h4>
+    <p>
+      
+    </p><h3>
+      <a name="midi:noteoff" id="midi:noteoff">midi:noteoff</a>
+    </h3>
+    <h4>
+      midi:noteoff <i>channel</i> <i>note</i>
+    </h4>
+    <p>
+      
+    </p><h3>
+      <a name="midi:note" id="midi:note">midi:note</a>
+    </h3>
+    <h4>
+      midi:note <i>channel</i> <i>note</i> <i>volume</i> <i>duration</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:instrument" id="midi:instrument">midi:instrument</a>
+    </h3>
+    <h4>
+      midi:instrument <i>channel</i> <i>instrument</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:pitch.bend" id="midi:pitch.bend">midi:pitch.bend</a>
+    </h3>
+    <h4>
+      midi:pitch.bend <i>channel</i> <i>bend</i>
+    </h4>
+    <p>
+      Pitch Bend messages tell the receiving device to change the pitch of a sound. These messages are usually sent by moving a lever or wheel on the left side of a MIDI keyboard. 
+    </p>
+    <h3>
+      <a name="midi:controller" id="midi:controller">midi:controller</a>
+    </h3>
+    <h4>
+      midi:controller <i>channel</i> <i>controller</i> <i>parameter</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:key.pressure" id="midi:key.pressure">midi:key.pressure</a>
+    </h3>
+    <h4>
+      midi:key.pressure <i>channel</i> <i>note</i> <i>pressure</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:channel.pressure" id="midi:channel.pressure">midi:channel.pressure</a>
+    </h3>
+    <h4>
+      midi:channel.pressure <i>channel</i> <i>pressure</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:volume" id="midi:volume">midi:volume</a>
+    </h3>
+    <h4>
+      midi:volume <i>channel</i> <i>volume</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:expression" id="midi:expression">midi:expression</a>
+    </h3>
+    <h4>
+      midi:expression <i>channel</i> <i>expression</i>
+    </h4>
+    <p>
+      Fine tuning to volume
+    </p>
+    <h3>
+      <a name="midi:modulation" id="midi:modulation">midi:modulation</a>
+    </h3>
+    <h4>
+      midi:modulation <i>channel</i> <i>modulation</i>
+    </h4>
+    <p>
+      Modulation is usually used to control vibrato, it can usually be assigned to other parameters such as pitch and volume.
+    </p>
+    <h3>
+      <a name="midi:pan" id="midi:pan">midi:pan</a>
+    </h3>
+    <h4>
+      midi:pan <i>channel</i> <i>pan</i>
+    </h4>
+    <p>
+      Where within the stereo field the device's sound will be placed (assuming that it has stereo audio outputs). If a MultiTimbral device, then each Part usually has its own pan position. This is generally when Pan becomes useful, because then you can use Pan, Volume, and Balance controllers to internally mix all of the Parts to the device's stereo outputs.
+
+Pan should effect all notes on the channel, including notes that were triggered prior to the pan message being received, and are still sustaining. 
+    </p>
+    <h3>
+      <a name="midi:sustain" id="midi:sustain">midi:sustain</a>
+    </h3>
+    <h4>
+      midi:sustain <i>channel</i> <i>value</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:reverb" id="midi:reverb">midi:reverb</a>
+    </h3>
+    <h4>
+      midi:reverb <i>channel</i> <i>note</i> <i>volume</i> <i>duration</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:chorus" id="midi:chorus">midi:chorus</a>
+    </h3>
+    <h4>
+      midi:chorus <i>channel</i> <i>value</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:portamento.time" id="midi:portamento.time">midi:portamento.time</a>
+    </h3>
+    <h4>
+      midi:portamento.time <i>channel</i> <i>time</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:portamento" id="midi:portamento">midi:portamento</a>
+    </h3>
+    <h4>
+      midi:portamento <i>channel</i> <i>onoff</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:portamento.from" id="midi:portamento.from">midi:portamento.from</a>
+    </h3>
+    <h4>
+      midi:portamento.from <i>channel</i> <i>note</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:rpn" id="midi:rpn">midi:rpn</a>
+    </h3>
+    <h4>
+      midi:rpn <i>channel</i> <i>lorpn</i> <i>hirpn</i> <i>lodata</i> <i>hidata</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:nrpn" id="midi:nrpn">midi:nrpn</a>
+    </h3>
+    <h4>
+      midi:nrpn <i>channel</i> <i>lorpn</i> <i>hirpn</i> <i>lodata</i> <i>hidata</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:reset.controllers" id="midi:reset.controllers">midi:reset.controllers</a>
+    </h3>
+    <h4>
+      midi:reset.controllers <i>channel</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:all.notes.off" id="midi:all.notes.off">midi:all.notes.off</a>
+    </h3>
+    <h4>
+      midi:all.notes.off <i>channel</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:pitch.sens" id="midi:pitch.sens">midi:pitch.sens</a>
+    </h3>
+    <h4>
+      midi:pitch.sens <i>channel</i> <i>semitones</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:mastertune.fine" id="midi:mastertune.fine">midi:mastertune.fine</a>
+    </h3>
+    <h4>
+      midi:mastertune.fine <i>channel</i> <i>cents</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:mastertune.coarse" id="midi:mastertune.coarse">midi:mastertune.coarse</a>
+    </h3>
+    <h4>
+      midi:mastertune.coarse <i>channel</i> <i>hidata</i>
+    </h4>
+    <p>
+      
+    </p>
+    <h3>
+      <a name="midi:panic" id="midi:panic">midi:panic</a>
+    </h3>
+    <h4>
+      midi:panic
+    </h4>
+    <p>
+      
+    </p>
+    
+    
+    <h2>
+      Sound names
+    </h2>
+    <h3>
+      <a name="drumnames" id="drumnames">Drums</a>
+    </h3>
+    <pre>35. Acoustic Bass Drum             59. Ride Cymbal 2
+36. Bass Drum 1                    60. Hi Bongo
+37. Side Stick                     61. Low Bongo
+38. Acoustic Snare                 62. Mute Hi Conga
+39. Hand Clap                      63. Open Hi Conga
+40. Electric Snare                 64. Low Conga
+41. Low Floor Tom                  65. Hi Timbale
+42. Closed Hi Hat                  66. Low Timbale
+43. Hi Floor Tom                   67. Hi Agogo
+44. Pedal Hi Hat                   68. Low Agogo
+45. Low Tom                        69. Cabasa
+47. Open Hi Hat                    70. Maracas
+47. Low Mid Tom                    71. Short Whistle
+48. Hi Mid Tom                     72. Long Whistle
+49. Crash Cymbal 1                 73. Short Guiro
+50. Hi Tom                         74. Long Guiro
+51. Ride Cymbal 1                  75. Claves
+52. Chinese Cymbal                 76. Hi Wood Block
+53. Ride Bell                      77. Low Wood Block
+54. Tambourine                     78. Mute Cuica
+55. Splash Cymbal                  79. Open Cuica
+56. Cowbell                        80. Mute Triangle
+57. Crash Cymbal 2                 81. Open Triangle
+58. Vibraslap       
+</pre>
+    <h3>
+      <a name="instrumentnames" id="instrumentnames">Instruments</a>
+    </h3>
+    <pre><b>Piano</b>                              <b>Reed</b>
+1. Acoustic Grand Piano            65. Soprano Sax
+2. Bright Acoustic Piano           66. Alto Sax
+3. Electric Grand Piano            67. Tenor Sax
+4. Honky-tonk Piano                68. Baritone Sax
+5. Electric Piano 1                69. Oboe
+6. Electric Piano 2                70. English Horn
+7. Harpsichord                     71. Bassoon
+8. Clavi                           72. Clarinet
+
+<b>Chromatic Percussion</b>               <b>Pipe</b>
+9. Celesta                         73. Piccolo
+10. Glockenspiel                   74. Flute
+11. Music Box                      75. Recorder
+12. Vibraphone                     76. Pan Flute
+13. Marimba                        77. Blown Bottle
+14. Xylophone                      78. Shakuhachi
+15. Tubular Bells                  79. Whistle
+16. Dulcimer                       80. Ocarina
+
+<b>Organ</b>                              <b>Synth Lead</b>
+17. Drawbar Organ                  81. Square Wave
+18. Percussive Organ               82. Sawtooth Wave
+19. Rock Organ                     83. Calliope
+20. Church Organ                   84. Chiff
+21. Reed Organ                     85. Charang
+22. Accordion                      86. Voice
+23. Harmonica                      87. Fifths
+24. Tango Accordion                88. Bass and Lead
+
+<b>Guitar</b>                             <b>Synth Pad</b>
+25. Nylon String Guitar            89. New Age  
+26. Steel Acoustic Guitar          90. Warm  
+27. Jazz Electric Guitar           91. Polysynth  
+28. Clean Electric Guitar          92. Choir  
+29. Muted Electric Guitar          93. Bowed  
+30. Overdriven Guitar              94. Metal  
+31. Distortion Guitar              95. Halo  
+32. Guitar harmonics               96. Sweep  
+
+<b>Bass</b>                               <b>Synth Effects</b>
+33. Acoustic Bass                  97. Rain  
+34. Fingered Electric Bass         98. Soundtrack  
+35. Picked Electric Bass           99. Crystal  
+36. Fretless Bass                  100. Atmosphere  
+37. Slap Bass 1                    101. Brightness
+38. Slap Bass 2                    102. Goblins
+39. Synth Bass 1                   103. Echoes
+40. Synth Bass 2                   104. Sci-fi
+
+<b>Strings</b>                            <b>Ethnic</b>
+41. Violin                         105. Sitar
+42. Viola                          106. Banjo
+43. Cello                          107. Shamisen
+44. Contrabass                     108. Koto
+45. Tremolo Strings                109. Kalimba
+47. Pizzicato Strings              110. Bag pipe
+47. Orchestral Harp                111. Fiddle
+48. Timpani                        112. Shanai
+
+<b>Ensemble</b>                           <b>Percussive</b>
+49. String Ensemble 1              113. Tinkle Bell
+50. String Ensemble 2              114. Agogo
+51. Synth Strings 1                115. Steel Drums
+52. Synth Strings 2                116. Woodblock
+53. Choir Aahs                     117. Taiko Drum
+54. Voice Oohs                     118. Melodic Tom
+55. Synth Voice                    119. Synth Drum
+56. Orchestra Hit                  120. Reverse Cymbal
+
+<b>Brass</b>                              <b>Sound Effects</b>
+57. Trumpet                        121. Guitar Fret Noise
+58. Trombone                       122. Breath Noise
+59. Tuba                           123. Seashore
+60. Muted Trumpet                  124. Bird Tweet
+61. French Horn                    125. Telephone Ring
+62. Brass Section                  126. Helicopter
+63. Synth Brass 1                  127. Applause
+64. Synth Brass 2                  128. Gunshot
+</pre>
+
+</body></html>

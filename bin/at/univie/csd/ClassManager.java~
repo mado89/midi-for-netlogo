@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package at.univie.csd;
+
+import org.nlogo.api.DefaultClassManager;
+import org.nlogo.api.ExtensionException;
+import org.nlogo.api.PrimitiveManager;
+
+/**
+ * @author Martin Dobiasch
+ * 
+ */
+public class ClassManager extends DefaultClassManager
+{
+	
+	public void load(PrimitiveManager primitiveManager) throws ExtensionException
+	{
+		primitiveManager.addPrimitive("noteon", NoteOn)
+	}
+	
+}

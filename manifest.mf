@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Extension-Name: midi
+Class-Manager: at.univie.csd.MidiManager
+NetLogo-Extension-API-Version: 4.1
