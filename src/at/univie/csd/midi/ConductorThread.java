@@ -22,7 +22,7 @@ public class ConductorThread extends Thread
 	{
 		super();
 		m_ctx= ctx;
-		MidiManager.debug("CT init");
+		// MidiManager.debug("CT init");
 		
 		this.setPriority(MIN_PRIORITY);
 	}
@@ -45,10 +45,10 @@ public class ConductorThread extends Thread
 				l= c.getDueEvents();
 				// MidiManager.debug("CT4");
 				
-				MidiManager.debug("Conductor conduct release Conductor " + l.size());
+				// MidiManager.debug("Conductor conduct release Conductor " + l.size());
 				MidiManager.getMidiContext().releaseConductor();
 				
-				MidiManager.debug("Conductor conduct start");
+				// MidiManager.debug("Conductor conduct start");
 				
 				for(i= 0; i < l.size(); i++)
 				{
@@ -62,7 +62,7 @@ public class ConductorThread extends Thread
 					//m_recv.send(ev.msg, ev.abstime);
 				}
 				
-				MidiManager.debug("Conductor conduct end");
+				// MidiManager.debug("Conductor conduct end");
 				
 				Thread.sleep(100);
 				Thread.yield();
@@ -70,13 +70,15 @@ public class ConductorThread extends Thread
 		}
 		catch( ExtensionException e)
 		{
-			MidiManager.debug("ExtensionException in CT");
-			MidiManager.debug(e.getMessage());
+			// TODO: 
+			// MidiManager.debug("ExtensionException in CT");
+			// MidiManager.debug(e.getMessage());
 		}
 		catch (InterruptedException e)
 		{
-			MidiManager.debug("InterruptedException in CT");
-			MidiManager.debug(e.getMessage());
+			// TODO: 
+			// MidiManager.debug("InterruptedException in CT");
+			// MidiManager.debug(e.getMessage());
 		}
 	}
 }

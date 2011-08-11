@@ -6,7 +6,6 @@ import javax.sound.midi.ShortMessage;
 import org.nlogo.agent.Turtle;
 import org.nlogo.agent.World;
 import org.nlogo.api.Agent;
-import org.nlogo.api.AgentException;
 import org.nlogo.api.Argument;
 import org.nlogo.api.Context;
 import org.nlogo.api.ExtensionException;
@@ -15,7 +14,6 @@ import org.nlogo.api.Syntax;
 
 import at.univie.csd.Conversion;
 import at.univie.csd.MidiCommand;
-import at.univie.csd.MidiManager;
 
 public class UpdatePosition extends MidiCommand
 {
@@ -26,7 +24,7 @@ public class UpdatePosition extends MidiCommand
 	
 	public Syntax getSyntax()
 	{
-		return Syntax.commandSyntax();
+		return Syntax.commandSyntax(new int[]{Syntax.NumberType()});
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,
@@ -44,7 +42,7 @@ public class UpdatePosition extends MidiCommand
 		Turtle t;
 		double px, py;
 		
-		MidiManager.debug("UpdatePosition start");
+		// MidiManager.debug("UpdatePosition start");
 		
 		agent= ctx.getAgent();
 		
@@ -54,7 +52,7 @@ public class UpdatePosition extends MidiCommand
 		t= world.getTurtle(channel);
 		
 		//Debugging
-		/*throw new ExtensionException("Update Position: \n" +
+		/*MidiManager.debug("Update Position: \n" +
 		"x: " + t.xcor() + "\n" +
 		"y: " + t.ycor() + "\n" +
 		"xmin: " + world.minPxcor() + "\n" +
@@ -65,13 +63,7 @@ public class UpdatePosition extends MidiCommand
 		px= t.xcor();
 		py= t.ycor();
 		
-		for(int i= 0; i < t.getVariableCount(); i++)
-		//try {
-			MidiManager.debug( "Update: " + t.getVariable(i) );
-		//} catch (AgentException e1) {
-		//	MidiManager.debug( "Exception: " + e1.getMessage());
-		//	e1.printStackTrace();
-		//}
+		channel= args[0].getIntValue();
 		
 		if( px > 0 )
 			tpan= world.maxPxcor() / px;
@@ -107,16 +99,16 @@ public class UpdatePosition extends MidiCommand
 			//msg2.setMessage(ShortMessage.CONTROL_CHANGE, channel, 7, vol);
 			msg2.setMessage(ShortMessage.CONTROL_CHANGE, channel, 11, exp);
 			
-			MidiManager.debug("UpdatePosition pre preAction");
+			// MidiManager.debug("UpdatePosition pre preAction");
 			preAction();
-			MidiManager.debug("UpdatePosition post preAction");
+			// MidiManager.debug("UpdatePosition post preAction");
 			
 			m_recv.send(msg1, -1);
 			m_recv.send(msg2, -1);
 			
-			MidiManager.debug("UpdatePosition pre postAction");
+			// MidiManager.debug("UpdatePosition pre postAction");
 			postAction();
-			MidiManager.debug("UpdatePosition post postAction");
+			// MidiManager.debug("UpdatePosition post postAction");
 			
 		}
 		catch(InvalidMidiDataException e)
@@ -128,6 +120,6 @@ public class UpdatePosition extends MidiCommand
 			postAction();
 		}
 		
-		MidiManager.debug("UpdatePosition done");
+		// MidiManager.debug("UpdatePosition done");
 	}
 }

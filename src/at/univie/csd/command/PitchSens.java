@@ -28,7 +28,7 @@ public class PitchSens extends MidiCommand
 	
 	public Syntax getSyntax()
 	{
-		return Syntax.commandSyntax(new int[] { Syntax.TYPE_NUMBER, Syntax.TYPE_NUMBER });
+		return Syntax.commandSyntax(new int[] { Syntax.NumberType(), Syntax.NumberType() });
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,

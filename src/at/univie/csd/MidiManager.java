@@ -3,18 +3,48 @@
  */
 package at.univie.csd;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import javax.sound.midi.MidiUnavailableException;
 
 import org.nlogo.api.DefaultClassManager;
 import org.nlogo.api.ExtensionException;
 import org.nlogo.api.PrimitiveManager;
 
-import at.univie.csd.command.*;
+import at.univie.csd.command.AllNotesOff;
+import at.univie.csd.command.ChannelPressure;
+import at.univie.csd.command.Chorus;
+import at.univie.csd.command.ConductorAddToSheet;
+import at.univie.csd.command.ConductorAddToSheetWT;
+import at.univie.csd.command.ConductorClearSheets;
+import at.univie.csd.command.ConductorConduct;
+import at.univie.csd.command.ConductorPlaymodeEndless;
+import at.univie.csd.command.ConductorPlaymodeNormal;
+import at.univie.csd.command.ConductorReset;
+import at.univie.csd.command.ConductorStart;
+import at.univie.csd.command.ConductorStop;
+import at.univie.csd.command.Controller;
+import at.univie.csd.command.Expression;
+import at.univie.csd.command.Instrument;
+import at.univie.csd.command.KeyPressure;
+import at.univie.csd.command.MastertuneCoarse;
+import at.univie.csd.command.MastertuneFine;
+import at.univie.csd.command.Modulation;
+import at.univie.csd.command.Note;
+import at.univie.csd.command.NoteOff;
+import at.univie.csd.command.NoteOn;
+import at.univie.csd.command.Nrpn;
+import at.univie.csd.command.Pan;
+import at.univie.csd.command.Panic;
+import at.univie.csd.command.PitchBend;
+import at.univie.csd.command.PitchSens;
+import at.univie.csd.command.Portamento;
+import at.univie.csd.command.PortamentoFrom;
+import at.univie.csd.command.PortamentoTime;
+import at.univie.csd.command.ResetControllers;
+import at.univie.csd.command.Reverb;
+import at.univie.csd.command.Rpn;
+import at.univie.csd.command.Sustain;
+import at.univie.csd.command.UpdatePosition;
+import at.univie.csd.command.Volume;
 
 /**
  * @author Martin Dobiasch
@@ -23,7 +53,7 @@ import at.univie.csd.command.*;
 public class MidiManager extends DefaultClassManager
 {
 	private static MidiContext ctx;
-	private static BufferedWriter out;
+	// private static BufferedWriter out;
 	
 	public MidiManager() throws ExtensionException
 	{
@@ -35,10 +65,10 @@ public class MidiManager extends DefaultClassManager
 		{
 			throw new ExtensionException("Midi not available");
 		}
-		openfile();
+		// openfile();
 	}
 	
-	private void openfile()
+	/*private void openfile()
 	{
 		File file= new File("midiextensionlog.txt");
 		try
@@ -49,9 +79,9 @@ public class MidiManager extends DefaultClassManager
 		{
 			//Debug.showMessage("const");
 		}
-	}
+	}*/
 	
-	public static void debug(String s)
+	/*public static void debug(String s)
 	{
 		try
 		{
@@ -63,7 +93,7 @@ public class MidiManager extends DefaultClassManager
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public static MidiContext getMidiContext()
 	{
