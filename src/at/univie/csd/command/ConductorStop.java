@@ -19,8 +19,8 @@ public class ConductorStop extends DefaultCommand/*MidiCommand*/
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,
 	LogoException
 	{
-		MidiManager.debug("conductor.stop start");
+		// MidiManager.debug("conductor.stop start");
 		MidiManager.getMidiContext().stopCondcutor();
-		MidiManager.debug("conductor.stop end");
+		// MidiManager.debug("conductor.stop end");
 	}
 }

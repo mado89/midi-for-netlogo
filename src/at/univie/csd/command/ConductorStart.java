@@ -22,7 +22,7 @@ public class ConductorStart extends DefaultCommand/*MidiCommand*/
 	{
 		MidiContext mctx;
 		
-		MidiManager.debug("conductor.start start");
+		// MidiManager.debug("conductor.start start");
 		
 		mctx= MidiManager.getMidiContext();
 		
@@ -31,6 +31,6 @@ public class ConductorStart extends DefaultCommand/*MidiCommand*/
 		
 		mctx.startConductor(ctx);
 		
-		MidiManager.debug("conductor.start end");
+		// MidiManager.debug("conductor.start end");
 	}
 }

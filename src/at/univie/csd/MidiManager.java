@@ -3,11 +3,6 @@
  */
 package at.univie.csd;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import javax.sound.midi.MidiUnavailableException;
 
 import org.nlogo.api.DefaultClassManager;
@@ -23,7 +18,7 @@ import at.univie.csd.command.*;
 public class MidiManager extends DefaultClassManager
 {
 	private static MidiContext ctx;
-	private static BufferedWriter out;
+	// private static BufferedWriter out;
 	
 	public MidiManager() throws ExtensionException
 	{
@@ -35,10 +30,10 @@ public class MidiManager extends DefaultClassManager
 		{
 			throw new ExtensionException("Midi not available");
 		}
-		openfile();
+		// openfile();
 	}
 	
-	private void openfile()
+	/*private void openfile()
 	{
 		File file= new File("midiextensionlog.txt");
 		try
@@ -63,7 +58,7 @@ public class MidiManager extends DefaultClassManager
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public static MidiContext getMidiContext()
 	{
@@ -72,6 +67,8 @@ public class MidiManager extends DefaultClassManager
 	
 	public void load(PrimitiveManager primitiveManager) throws ExtensionException
 	{
+		primitiveManager.addPrimitive("open.device", new OpenDevice());
+		
 		primitiveManager.addPrimitive("noteon", new NoteOn());
 		primitiveManager.addPrimitive("noteoff", new NoteOff());
 		primitiveManager.addPrimitive("note", new Note());

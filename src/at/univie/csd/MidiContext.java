@@ -42,6 +42,30 @@ public class MidiContext
 		
 		m_ct= null;
 	}
+	
+	/**
+	 * Returns the DeviceInfo Objects
+	 * @return MidiDevice.Info[] infos
+	 */
+	public MidiDevice.Info[] getMidiDeviceInfo()
+	{
+		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
+		return infos;
+	}
+	
+	/**
+	 * Opens a different Midi device
+	 * @throws MidiUnavailableException when midi is not available
+	 * @param nr Number of the Device in the Device.Info Array
+	 */
+	public void setDevice(int nr) throws MidiUnavailableException
+	{
+		if( m_dev != null && m_dev.isOpen() )
+			m_dev.close();
+		
+		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
+		m_dev = MidiSystem.getMidiDevice(infos[0]);
+	}
 
 	/**
 	 * Waits for the Device to be free, and locks it
