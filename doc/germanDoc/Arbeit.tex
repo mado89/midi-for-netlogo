@@ -1,0 +1,97 @@
+\documentclass[10pt,parskip]{scrartcl}
+%Options -- Point size:  10pt (default), 11pt, 12pt
+%        -- Paper size:  letterpaper (default), a4paper, a5paper, b5paper
+%                        legalpaper, executivepaper
+%        -- Orientation  (portrait is the default)
+%                        landscape
+%        -- Print size:  oneside (default), twoside
+%        -- Quality      final(default), draft
+%        -- Title page   notitlepage, titlepage(default)
+%        -- Columns      onecolumn(default), twocolumn
+%        -- Equation numbering (equation numbers on the right is the default)
+%                        leqno
+%        -- Displayed equations (centered is the default)
+%                        fleqn (equations start at the same distance from the right side)
+%        -- Open bibliography style (closed is the default)
+%                        openbib
+% For instance the command
+%           \documentclass[a4paper,12pt,leqno]{article}
+% ensures that the paper size is a4, the fonts are typeset at the size 12p
+% and the equation numbers are on the left side
+%
+
+\usepackage{listings}
+\bibliographystyle{plain}
+\usepackage[activate=normal]{pdfcprot}
+\usepackage{url}
+\usepackage{tabularx} %For word wrap
+\usepackage{setspace}
+\usepackage{ngerman}
+%\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
+
+%
+% PAGE LAYOUT
+%
+\setlength{\topmargin}{-1cm}
+\setlength{\headheight}{1.5cm}
+\setlength{\headsep}{0.3cm}
+\setlength{\textheight}{23.5cm}
+\setlength{\oddsidemargin}{0.5cm}
+\setlength{\textwidth}{15cm}
+
+\newcommand{\listingref}[1]{Listing \#\ref{#1}, on Page \pageref{#1}}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{4}
+% TOREAD: http://homepage.ruhr-uni-bochum.de/Georg.Verweyen/latexfuerword.html
+
+% just some LaTeX parameters
+%\hbadness=10
+%\hfuzz=.01
+
+% \input{}   ... insert file without new page
+% \include{} ... insert file with new page
+
+\input{listingsettings.def.tex}
+
+\begin{document}
+\subject{Bakkalaureatsarbeit}
+\author{Martin DOBIASCH \\MatNr:0828302\\Studium E-033-522 Informatikmanagement}
+\title{NetLogo um Befehle f"ur Midi erweitern}
+\date{2010-11-18}
+
+% \frontmatter
+% % (in)famous first page for the University of Vienna
+\input{first_page.tex}
+
+\begin{abstract}
+Diese Arbeit beschreibt die Arbeit rund um die Erweiterung von NetLogo \cite{NetLogo} um 
+Midi-Befehle f"ur die einzelnen Akteure (Turtles und Patches). 
+%Diese Arbeit beschreibt das Projekt Midi f"ur NetLogo. 
+Sie enthält Beispiele die im Informatik-Unterricht eingesetzt werden k"onnen
+um Sch"ulerinnen und Sch"ulern einen technischen Zugang zu Problemen 
+aufzuzeigen
+
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+% \mainmatter %main part starts here
+
+%\setcounter{chapter}{-1} % my first chapter starts with "0"
+
+\input{introduction.tex}
+\input{extension.tex}
+\input{Dirigent.tex}
+\input{Befehle.tex}
+\input{Beispiele.tex}
+% \input{sourcen.tex}
+
+
+\addcontentsline{toc}{section}{Literaturverzeichnis}
+\bibliographystyle{amsplain} %take natbib if you need refernces by Author&year
+\bibliography{lit}
+
+\end{document}
+

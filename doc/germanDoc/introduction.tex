@@ -1,0 +1,155 @@
+\section{Einleitung}
+\subsection{Anreger \& Betreuer}
+Auftraggeber und Betreuer dieser Arbeit war AO. Univ. Prof. Dr. Erich Neuwirth.
+Ich m"ochte ihm hier an dieser Stelle bei ihm f"ur die ausgezeichnete Betreuung
+und Zusammenarbeit bedanken.
+
+\subsection{Ziel der Arbeit}
+Die vorliegende Arbeit versteht sich als Arbeitsunterlage f"ur Lehrpersonen.
+Nicht jedoch aber als Handout f"ur die Lernenden. Lehrende sollen durch dieses
+Dokument einen Einblick in die verwendeten Tools bekommen und aufbereitete
+Beispiele vorfinden, welche sie f"ur ihren Unterricht verwenden k"onnen.
+
+Der Einsatz von Musik im Informatikunterricht mag auf den ersten Blick etwas
+seltsam, wenn nicht sogar verst"orend wirken. Er bringt jedoch einen gro"sen
+Vorteil mit sich: Fehler im Ansatz oder in der Ausarbeitung sind sofort
+h"orbar. Ein falsch transponierter Dreiklang kann auch von einem musikalisch
+nicht begabten Lernenden erkannt werden. Zu dem kann die Musik als m"achtiges
+didaktisches Werkzeug gesehen werden, wenn es um die Vermittlung von parallelen
+Verarbeitungsmodellen geht. Die Metapher eines Orchesters kann sehr gut heran
+gezogen werden, da in ein Orchester aus mehreren MusikerInnen besteht. Diese
+agieren von einander im wesentlichen unabh"angig, m"ussen jedoch bis zu einem
+gewissen Grad von etwas bzw. jemand gesteuert werden: Dem Dirigenten, auf
+englisch dem Condcutor. Auch die Metapher des Dirigenten/Conductor wird in 
+meiner Arbeit stark zum Einsatz kommen. 
+
+\emph{Wichtig f"ur einen Einsatz im Unterricht, ist der Hinweis, dass die
+Lernenden Kopfh"orer mitbringen sollten.} Spielen mehrere ohne Kopfh"orer
+ist ein Unterricht kaum mehr m"oglich und es herrscht Chaos. 
+
+Beispiele daf"ur, was mit dem Toolkit m"oglich ist, finden sich im letzten 
+Abschnitt. Es ist beispielsweise m"oglich, 2 Rettungsautos aus verschiedenen 
+Richtungen fahren zu lassen und die Signalt"one der Autos akustisch zu lokalisieren.
+
+
+\subsection{Verwendete Tools}
+Im wesentlichen wird die NetLogo-Extension 'midi' verwendet. Die Midi-Extension
+f"ur NetLogo enth"alt einige der F"ahigkeiten die das MidiCSD-Toolkit\cite{MidiCSD} f"ur 
+OpenOffice bzw. Excel 
+ebenfalls beherrscht. Der n"achste Abschnitt beschreibt die Notwendigkeit
+der NetLogo-Erweiterung bzw. zeigt die Anleitung in 'Installation
+der Erweiterung f"ur NetLogo' wie simpel sie zu installieren ist und
+somit einfach im Unterricht eingesetzt werden kann. 
+Es sei an dieser Stelle explizit auf MidiCSD hingewiesen. Gerade f"ur 
+Experimente mit Musik eignet es sich hervorragend um im Informatik-Unterricht
+angewendet zu werden. 
+
+\subsection{Ausgangslage f"ur NetLogo}
+\lstset{language=Logo}
+Bisher st"orte die Tatsache, dass es nicht m"oglich war in NetLogo Midi-Kan"ale
+direkt anzusprechen. In der Version 4.1.1 (aktuell zum Erstellungszeitpunkt des 
+Projektes Juli, 2010) konnten lediglich die Befehle 
+\lstinline|sound:play-drum drum velocity| und 
+\lstinline|sound:play-note instrument keynumber velocity duration| verwendet
+werden um Modelle mit T"onen zu versehen. %Das bedeutet aber gro"se 
+%Einschr"ankungen. 
+Als Konsequenz daraus konnte man den einzelnen Akteuren keine musikalischen Aktionen 
+zuordnen. So ist es zum Beispiel nicht m"oglich f"ur das Beispiel 
+''Rettungsauto'' (siehe \ref{Bsp:Rettungsauto}) den Dopplereffekt zu erzeugen,
+geschweige denn "uberhaupt den Ton des Autos lauter werden zu lassen im Falle
+des sich ann"ahernden Autos und wieder leiser werden zu lassen, im Fall des sich
+entfernenden Autos. 
+
+NetLogo hat eine (fast) unbeschr"ankte Anzahl an Akteuren, den Turtles. Bisher
+war es aber nicht m"oglich Musik, oder einzelne T"one mit diesen zu verbinden.
+Sieht man sich die Beispielsammlung der NetLogo-Distribution an, findet man im
+Bereich Musik nur wenige Beispiele. Auch kann in diesen die volle Macht von
+NetLogo nicht ausgenutzt werden. So wird z.B. im Beatbox Beispiel die Musik
+von einer zentralen Prozedur aus angewandt. Alle 'Trommler' spielen jedoch
+auf dem selben Midi-Kanal. Das w"are also so als w"urde doch nur ein Trommler spielen
+und mehrere Percussioninstrumente zur gleichen Zeit bedienen.
+
+Im vorigen Absatz wird erw"ahnt, dass nur auf einen Midi-Kanal zugegriffen wird.
+Das ist wie schon eingangs erw"ahnt ein gro"ses Manko. Es ist also nicht
+m"oglich Effekte nur f"ur einzelne Instrumente zu steuern. Beispiel: Der 
+Trompeter soll leise spielen weil gerade die Fl"ote ein Solo hat (Funktioniert
+im echten Leben leider auch nicht immer). 
+
+\subsection{Installation der Erweiterung f"ur NetLogo}
+Es gibt zwei Varianten um die Erweiterung zu installieren
+\begin{itemize}
+\item die Datei ''midi.jar'' in einen Unterordner ''midi'' neben das Model legen,
+welches die Erweiterung verwenden m"ochte.
+\item die Datei ''midi.jar'' in einen Ordner ''midi'' in das Verzeichnis ''extensions''
+der NetLogo-Installation legen. 
+\end{itemize}
+Ebenso erfolgt die Installation f"ur als Applet im Internet hinterlegte Modelle.
+Auch hier muss die ''midi.jar'' Datei ein einem ''midi'' Unterordner liegen.
+
+\subsection{Gliederung der Arbeit}
+Ich werde zuerst kurz beschreiben wie ich NetLogo um zus"atzliche Befehle erweitert
+habe. Dann werde ich die Konzepte hinter der Erweiterung erl"autern und
+Beispiele bringen wie die Befehle eingesetzt werden k"onnen. Diese Beispiele
+sind schon so vorbereitet um in einem etwaigen Unterricht mit Sch"ulern eingesetzt
+werden zu k"onnen. %Am Ende der Arbeit befinden sich die Listings der Erweiterung. 
+
+Es werden einige Details hinter der Arbeit sehr ausf"uhrlich erl"autert. Dies 
+wird gemacht um den Lesern bzw. Anwendern dieser Arbeit einen tieferen Einblick
+in die Interna der Erweiterung zu geben. Ein tieferes Verst"andnis der Arbeit kann
+einen verbesserten Einsatz im Unterricht erm"oglichen, da so jeder Lehrende 
+individuell St"arken und Schw"achen f"ur den pers"onlichen Einsatz im Unterricht
+ausmachen kann. Weiters tauchen in der Praxis der Informatik immer wieder Probleme
+auf die nur durch ein detailliertes Wissen der verwendeten Mittel gel"ost werden
+k"onnen. Auch r"ustet ein gutes Hintergrundwissen "uber die Erweiterung die
+Lehrenden f"ur etwaige Fragen von interessierten Lernenden, welche zB die im
+Unterricht erl"auterten Beispiele noch erweitern wollen oder bei der Erweiterung
+auf Probleme gesto"sen sind. 
+
+\subsection{Test der Erweiterung}
+Da ein Teil meiner Arbeit war NetLogo\cite{NetLogo} Midi tauglich zu machen,
+musste dies auch getestet werden. 
+Die Arbeit wurde unter anderem mittels der weiter hinten in der Arbeit 
+beschriebenen Beispiele
+getestet. Es ist also gew"ahrleistet, dass diese Beispiele in der erl"auterten
+Form funktionieren und keine Seiteneffekte hervorrufen. 
+Getestet wurde sowohl auf Windows PCs so wie auf Apple Computern. 
+Verwendet wurde die zum Zeitpunkt der Arbeit aktuelle NetLogo Version 4.1.1. 
+
+Es wurden bei den Tests keine Unterschiede zwischen Windows und Mac OS entdeckt.
+
+% \subsection{Einsatz in der Unterrichtspraxis}
+% Die vorliegende Erweiterung kann direkt f"ur Unterrichtszwecke verwendet werden.
+% Bei der Ausarbeitung der Beispiele weiter hinter hinten in der Arbeit wurde
+% darauf geachtet sie m"oglichst gut aufzubereiten um sie direkt in Schulungen
+% einsetzen zu k"onnen. Sie liegen liegen als fertig implementierte Modelle vor. 
+% Die Modelle sind nicht direkt Teil meiner Arbeit. Sie wurden von Prof. Dr. Erich
+% Neuwirth erdacht und ich habe sie in seiner Lehrveranstaltung ''Kernthemen der
+% Fachdidaktik Informatik'' im Wintersemester 2009 kennen gelernt. 
+
+\subsection{W"unschenswertes f"ur die NetLogo-Erweiterung}
+Die Erweiterung wurde mit der Version 4.1.1 von NetLogo entwickelt. In geraumer
+Zeit sollte die Version 4.1.2 fertig gestellt werden. Mit dieser Version kann
+ein Problem meiner Erweiterung eventuell gel"ost werden und das hinzuf"ugen von
+Befehlen zu Notenbl"attern direkt als Befehl m"oglich sein. Es seien hier einige
+Aspekte aufgef"uhrt die von mir nicht in die Erweiterung aufgenommen wurden,
+manch Lehrendem aber als fehlende Aspekte auffallen. Diese Liste erhebt aber keinen
+Anspruch auf Vollst"andigkeit. Feedback von Lehrenden ist erw"unscht!
+
+Die aktuelle Implementierung k"onnte noch in folgenden Punkten erweitert werden:
+\begin{itemize}
+\item \emph{Midi-Rendern} Es k"onnen zur zeit nur direkt Befehle ausgegeben 
+werden. Eine m"ogliche Erweiterung ist, dass anstatt die Befehle auszugeben,
+die akustische Ausgabe des Modells in ein Midi-File zu schreiben. 
+
+\item \emph{Midi-Compiler} Wie sp"ater hinter in der Arbeit angemerkt wird, hat
+die Implementierung Befehlsabarbeitung noch Potential zur Optimierung. Es k"onnte
+angedacht werden, einzelne Bl"atter als Midi-Bl"atter zu deklarieren. Zu diesen
+k"onnen dann nur Midi-Befehle hinzugef"ugt werden, welche dann direkt als javainterne
+Midi-Commands kompiliert werden.
+
+\item \emph{Protokollierung} Das Projekt k"onnte zus"atzlich um die Funktionalit"at
+von Protokollausgaben der Befehle erweitert werden k"onnen. Anstatt von Midi-Noten
+werden k"onnten dann normale Notennamen ausgegeben werden k"onnen. 
+
+\end{itemize}
+

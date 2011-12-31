@@ -1,0 +1,72 @@
+\section{Der Dirigent in Midi-NetLogo}
+Ein weiterer Punkt den ich in die Aufgabenstellung inkludiert habe, war die
+M"oglichkeit Sequenzen zu definieren, welche dann unabh"angig abspielbar sein 
+sollen. Dieser Punkt wurde dann erweitert, dass es m"oglich sein soll, alle
+in NetLogo verf"ugbaren Befehle in so eine Sequenz zu packen. 
+
+Das kann nun daf"ur verwendet werden um im Informatik-Unterricht Threads zu
+vermitteln. Ein Thread ist damit nichts anderes als ein Sheet. 
+
+\subsection{Konzept}
+Wie der Name schon andeutet, ist dieser Aspekt mit der Metapher eines Orchesters
+gel"ost worden. Ein Dirigent hat die Kontrolle "uber mehrere Musiker die 
+Aktionen ausf"uhren sollen. Er bestimmt wann das Orchester zu spielen beginnt
+und wann es wieder aufh"ort. Weiters kann er nat"urlich auch wieder von Vorne
+beginnen lassen.
+
+Jedes Programm braucht auch Mechanismen zur Steuerung und Synchronisation 
+seiner Threads. Der Dirigent "ubernimmt diese Aufgabe und erm"oglicht so eine
+vereinfachte Form der Vermittlung von Thread-Synchronisation. 
+
+\subsection{Technische Realisierung}
+Wie schon im Konzept erw"ahnt wird NetLogo durch die Midi-Extension eine Zentrale Instanz 'Conductor'
+beigebracht. Diese verf"ugt "uber die folgenden F"ahigkeiten: \begin{itemize}
+\item Alle Notenbl"atter l"oschen
+\item Zu einem Notenblatt etwas hinzuf"ugen
+\item Zu einem Notenblatt einen mit Timecode versehenen Befehl hinzuf"ugen
+\item Alles auf Anfang setzen
+\item Dirigieren
+\item Endlos spielen lassen, normal spielen lassen
+\end{itemize}
+
+\subsubsection{Sheets - Kan"ale}\label{sec:sheet-channel}
+Der Dirigent h"alt eine fixe Anzahl von 16 Sheets. Die Zahl ist so festgelegt,
+da Midi 16 Kan"ale besitzt. Die Midi-Kan"ale besitzen die Nummern 1 - 16, die
+Sheets jedoch die Indizes/Nummern 0 - 15. "Uber eine Variable f"ur Agents kann
+eine Zuordnung von Agenten zu einem Kanal gemacht werden. 
+\begin{lstlisting}[language=Logo]
+turtles-own [channel]
+...
+to init
+  den Turtles channels zu ordnen
+end
+
+...
+
+to some.procedure
+	ask turtles[
+		midi:instrument channel 60
+	]
+end
+\end{lstlisting}
+Eine sehr einfach Variante den Turtles Kan"ale zuzuornen ist:
+\begin{lstlisting}[language=Logo]
+ask turtles[
+	set channel who + 1
+]
+\end{lstlisting}
+
+\subsubsection{Events}
+Die zentrale Aufgabe der Sheets ist es Befehle in chronologischer Reihenfolge
+auszuf"uhren. Es gibt zwei Befehle um einem Notenblatt Befehle hinzu zuf"ugen:
+\begin{itemize}
+\item conductor.add.to.sheet
+\item conductor.add.to.sheet.list
+\end{itemize}
+Beide Befehle machen im wesentlichen das Gleiche, jedoch werden dem Zweiten
+eine Liste von mit einem Timecode versehenen Befehlen "ubergeben, ersterer f"ugt
+einen einzelnen Befehl versehen mit einem Timecode zu einem Notenblatt hinzu. 
+Eine genauere Beschreibung ist im Kapitel "uber die Befehle zu finden. 
+
+
+

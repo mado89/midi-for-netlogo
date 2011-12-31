@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+
+\bibitem{midi-inst}
+Midi~Manufacturer Assosiation.
+\newblock Gm 1 soundset.
+\newblock \url{http://www.midi.org/techspecs/gm1sound.php}.
+\newblock last seen: 18.11.2010.
+
+\bibitem{midi-java}
+A~Luedeke.
+\newblock Java-sound, midi.
+\newblock
+  \url{http://www-lehre.informatik.uni-osnabrueck.de/~aluedeke/java/javaSound/midi.html}.
+\newblock last seen: 18.11.2010.
+
+\bibitem{MidiCSD}
+E~Neuwirth.
+\newblock Midicsd.
+\newblock \url{http://sunsite.univie.ac.at/musicfun/MidiCSD/}, 2008.
+
+\bibitem{midi-javafaq}
+Bomers~F Pfisterer~M.
+\newblock Java sound rescources: Faq: Midi programming.
+\newblock \url{http://www.jsresources.org/faq_midi.html}, 2000, 2005.
+\newblock last seen: 18.11.2010.
+
+\bibitem{fh-wedel}
+U~Schmidt.
+\newblock Oop mit java: Synchronisation von threads.
+\newblock
+  \url{http://www.fh-wedel.de/~si/vorlesungen/java/OOPMitJava/Multithreading/Synchronisation.html}.
+\newblock last seen: 29.9.2010.
+
+\bibitem{NetLogo}
+U~Wilensky.
+\newblock Netlogo.
+\newblock \url{http://ccl.northwestern.edu/netlogo/}, 1996.
+
+\end{thebibliography}

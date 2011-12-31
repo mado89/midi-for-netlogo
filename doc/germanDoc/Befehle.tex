@@ -1,0 +1,195 @@
+\section{Befehle der NetLogo-Extension}
+Alle Befehle beginnen mit einem vorangestellten \lstinline|midi:|. 
+Ich m"ochte hier kurz die Befehle beschreiben um der Lehrperson einen tieferen 
+Einblick zu gew"ahren und damit diese den Lernenden bei etwaigen Problemen kompetent
+helfen k"onnen. 
+
+Die Dokumentation der Befehle erfolgt immer in der Form \lstinline|Befehl Parameter|
+was dann in einem NetLogo-Programm als \lstinline|midi:Befehl Parameter| geschrieben
+wird. Die Befehlsnamen sind nicht(!) casesensitive. 
+\subsection{Midi-Befehle}
+\subsubsection{Standard Befehle}
+Auf eine Dokumentation der Standard-Midi-Befehle m"ochte ich hier verzichten. Es sei
+auf das Studium einschl"agiger Fachliteratur verwiesen. 
+Folgende Befehle sind in der Erweiterung verf"ugbar: 
+noteon,
+noteoff,
+instrument (F"ur eine Liste an Instrumenten siehe \cite{midi-inst}),
+pitch.bend,
+controller,
+key.pressure,
+channel.pressure,
+volume,
+expression,
+modulation,
+pan,
+sustain,
+reverb,
+chorus,
+portamento.time,
+portamento,
+portamento.from,
+rpn,
+nrpn,
+reset.controllers,
+all.notes.off,
+pitch.sens channel,
+mastertune.coarse,
+mastertune.fine,
+panic
+% \subsubsection{Standard Befehle}
+% \begin{itemize}
+% \item \lstinline|noteon channel note volume|
+% \item \lstinline|noteoff channel note|
+% \item \lstinline|instrument channel instrument| (F"ur eine Liste an Instrumenten
+% siehe \cite{midi-inst}
+% \item \lstinline|pitch.bend channel bend|
+% \item \lstinline|controller channel controller parameter|
+% \item \lstinline|key.pressure channel note pressure|
+% \item \lstinline|channel.pressure channel pressure|
+% \item \lstinline|volume channel volume|
+% \item \lstinline|expression channel expression|
+% \item \lstinline|modulation channel modulation|
+% \item \lstinline|pan channel pan|
+% \item \lstinline|sustain channel value|
+% \item \lstinline|reverb channel note volume duration|
+% \item \lstinline|chorus channel duration|
+% \item \lstinline|portamento.time channel time|
+% \item \lstinline|portamento channel onoff|
+% \item \lstinline|portamento.from channel note|
+% \item \lstinline|rpn channel lorpn hirpn lodata hidata|
+% \item \lstinline|nrpn channel lorpn hirpn lodata hidata|
+% \item \lstinline|reset.controllers channel|
+% \item \lstinline|all.notes.off channel|
+% \item \lstinline|pitch.sens channel semitones|
+% \item \lstinline|mastertune.coarse channel hidata|
+% \item \lstinline|mastertune.fine channel cents|
+% \item \lstinline|panic|
+% \end{itemize}
+\subsubsection{Der Note Befehle}
+\lstinline|note channel note volume duration| \label{note-warning}
+
+
+\begin{emph}Achtung: Dieser
+Befehl ist ein Blocking-Call. Er spielt eine Noten in der Dauer von 
+\lstinline|duration| (in ms angegeben ab). Erst dann wird das Programm fortgesetzt.
+Er setzt zuerst die Note und legt den Thread dann schlafen, nach Abwarten des
+Notenwertes l"oscht er die Note vom entsprechenden Midi-Kanal. Dieses Verhalten
+kann zu Problemen f"uhren wenn sie in Programmen in Kombination mit den 
+Conductor-Utilities verwendet werden. \end{emph}
+\subsection{Befehle f"ur Turtles/Agenten}
+\lstinline|updatepostion channel| 
+
+Dieser Befehl setzt eine eine Position im akustischen Raum f"ur die aktuelle
+Turtle, kann also nur in einem Turtle-Context angewandt werden. Die Position
+wird f"ur die Turtle die den Befehl aufruft errechnet und dann als virtuelle
+Position auf den "ubergebenen Channel gelegt (siehe auch \ref{sec:sheet-channel}. 
+Ver"andert werden die Parameter Pan und Expression. Ausgangspunkt f"ur die
+Berechnung ist der Koordinaten-Ursprung des NetLogo-Models. Als maximaler Wert
+f"ur die Skalierung wird auch jeweils der maximale Wert des Koordinatensystems
+verwendet wird. Das hei"st wenn das Model zB. auf der positiven X-Achse mehr Werte
+zul"asst als auf der negativen. Ist die Abstufung auf der positiven Seite feiner.
+
+\subsection{Befehle f"ur den Condcutor}
+\subsubsection{clear.sheets}
+Syntax: \lstinline|conductor.clear.sheets|
+
+L"oscht alle dem Conductor bekannten Notenbl"atter.
+\subsubsection{add.to.sheet}
+Syntax: \lstinline|conductor.add.to.sheet sheet time.distance command|
+
+Dieser Befehl f"ugt dem angegebenen Notenblatt am Ende ein Kommando hinzu. Das
+Kommando wird nach Ablauf der durch \lstinline|time.distance| angegebenen Zeit
+(in ms) ausgef"uhrt. Zus"atzlich ist das der Zeitpunkt von welchem aus der 
+Zeitpunkt f"ur ein m"ogliches nachfolgendes Kommando berechnet wird. Beispiel:
+\begin{lstlisting}[language=Logo]
+midi:conductor.clear.sheets
+midi:conductor.add.to.sheet 1 10 "midi:noteon 2 60 1"
+midi:conductor.add.to.sheet 1 2000 "midi:noteoff 2 60"
+midi:conductor.start
+\end{lstlisting}
+Nach Ablauf von zehn Milisekunden wird vom Notenblatt Eins auf dem Midi-Kanal
+Zwei die Note mit dem Wert 60 gespielt. Nach zwei Sekunden, also nach insgesamt
+2010 Milisekunden verstummt die Note wieder. 
+
+\subsubsection{add.to.sheet.list}
+Syntax: \lstinline|conductor.add.to.sheet.list sheet command.list|
+
+Dieses Kommando f"ugt dem angegebenen Notenblatt am Ende die Kommandos aus der 
+Liste ein. Die Kommando-Liste hat eine einfache Syntax: \lstinline|[time.code command]|
+Die Time-Codes funktionieren analog zu denen des \lstinline|add.to.sheet| Befehls.
+Das Kommando muss aber als String angegeben werden! Das kommt daher, dass NetLogo
+zum Entwicklungszeitpunkt (Juli-Oktober 2010) nicht ausreichend mit dem Syntax-Typ
+''Command'' umgehen konnte. Die Befehle sollten also getestet werden bevor sie
+auf die Notenbl"atter geschrieben werden. Der Vorteil dieses Befehls ist, dass
+er, mit geringen Modifikationen, die Ausgabe des ''to Logo'' des MidiCSD-Toolkits \cite{MidiCSD}
+f"ur Office Dr. Erich Neuwirth verwendet kann. Das untenstehende Beispiel demonstriert,
+wie der Befehl eingesetzt werden kann. 
+\begin{lstlisting}[language=Logo]
+to trommler
+  clear-all
+  midi:conductor.clear.sheets
+ 
+  midi:conductor.add.to.sheet.list 1 [
+		[0 "midi:note 10 45 1 200"]
+		[200 "midi:note 10 45 0.7 200"]
+		[200 "midi:note 10 45 0.7 200"]
+		[200 "midi:note 10 45 0.7 200"]
+		[200 "midi:note 10 45 1 200"]
+  ]
+  midi:conductor.add.to.sheet.list 2 [
+		[200 "midi:pan 10 -0.75"]
+		[200 "midi:pan 10 -0.5"]
+		[200 "midi:pan 10 -0.25"]
+		[200 "midi:pan 10 0"]
+  ]
+  
+  midi:conductor.add.to.sheet.list 3 [
+		[5 "midi:expression 10 0.75"]
+		[200 "midi:expression 10 0.69"]
+		[200 "midi:expression 10 0.63"]
+		[200 "midi:expression 10 0.56"]
+		[200 "midi:expression 10 0.5"]
+  ]
+  
+  midi:conductor.setplaymode.endless
+
+  midi:conductor.start
+end
+\end{lstlisting}
+
+\subsubsection{restart}
+Syntax: \lstinline|conductor.restart|
+
+Die Position auf den Notenbl"attern wird wieder auf Null gesetzt. Alle Notenbl"atter
+werden also wieder von Vorne abgearbeitet. 
+\subsubsection{conduct}
+Syntax: \lstinline|conductor.conduct|
+
+Der Dirigent wird angewiesen die aktuell anfallenden Befehle auf den Notenbl"attern
+abzuarbeiten. 
+
+\subsubsection{setplaymode.endless}
+Syntax: \lstinline|conductor.setplaymode.endless|
+
+Erreicht ein ''Musiker'' auf seinem Notenblatt das Ende, soll er wieder von 
+Vorne beginnen. Anders gesagt: Die Notenbl"atter sind nun nicht mehr linear
+sondern Kreise. Auf unterschiedliche L"angen/Dauer der Notenbl"atter wird aber
+nicht geachtet. 
+
+\subsubsection{setplaymode.normal}
+Syntax: \lstinline|conductor.setplaymode.normal|
+
+Anders als beim Endlos-Playmode wird der Dirigent angewiesen, wenn ein Notenblatt
+zu Ende ist, nicht wieder von Vorne zu beginnen sondern aufzuh"oren. 
+\subsubsection{start}
+Syntax: \lstinline|conductor.start|
+
+Dieser Befehl wei"st den Dirigenten an im Hintergrund zu dirigieren. Das Programm
+l"auft weiter w"ahrend im Hintergrund die Notenbl"atter abgearbeitet werden. 
+(Siehe auch \lstinline|conductor.stop|)
+\subsubsection{stop}
+Syntax: \lstinline|conductor.stop|
+
+Dieser Befehl weist den Dirigenten an seine Arbeit zu beenden. Die Abarbeitung
+der Notenbl"atter im Hintergrund wird beendet. 
