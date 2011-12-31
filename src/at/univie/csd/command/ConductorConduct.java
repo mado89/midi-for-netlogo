@@ -34,16 +34,17 @@ public class ConductorConduct extends DefaultCommand/*MidiCommand*/
 				ev= events.get(i);
 				//throw new ExtensionException( ev.msg );
 				
-				try
-				{
+				//try
+				//{
 					//Runs a Command, and not waits for the command to terminate
-					ctx.runCommand(ev.msg, false);
-				}
-				catch (ExtensionException e)
-				{
+					ev.cmd.perform(ctx, null);
+					// ctx.runCommand(ev.msg, false);
+				//}
+				//catch (ExtensionException e)
+				//{
 					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				//	e.printStackTrace();
+				//}
 			}
 		}
 	}

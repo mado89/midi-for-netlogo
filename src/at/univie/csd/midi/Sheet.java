@@ -6,6 +6,7 @@ import java.util.Iterator;
 //import javax.sound.midi.InvalidMidiDataException;
 //import javax.sound.midi.ShortMessage;
 
+import org.nlogo.api.CommandTask;
 import org.nlogo.api.ExtensionException;
 
 //import at.univie.csd.Conversion;
@@ -420,6 +421,7 @@ public class Sheet
 			abstime+= tc;
 	}*/
 	
+	@Deprecated
 	public void addCommand(String command, long tc)
 	{
 		TimedEvent ev;
@@ -429,6 +431,22 @@ public class Sheet
 		if( tc != NO_TIMECODE )
 			ev.abstime+= tc;
 		ev.msg= command;
+		sEventQueue.add( ev );
+		
+		if( tc != NO_TIMECODE )
+			abstime+= tc;
+	}
+	
+
+	public void addCommand(CommandTask command, long tc)
+	{
+		TimedEvent ev;
+		
+		ev= new TimedEvent();
+		ev.abstime= abstime;
+		if( tc != NO_TIMECODE )
+			ev.abstime+= tc;
+		ev.cmd= command;
 		sEventQueue.add( ev );
 		
 		if( tc != NO_TIMECODE )

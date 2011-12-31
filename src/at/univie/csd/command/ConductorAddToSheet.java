@@ -4,6 +4,7 @@
 package at.univie.csd.command;
 
 import org.nlogo.api.Argument;
+import org.nlogo.api.CommandTask;
 import org.nlogo.api.Context;
 import org.nlogo.api.DefaultCommand;
 import org.nlogo.api.ExtensionException;
@@ -24,7 +25,7 @@ public class ConductorAddToSheet extends DefaultCommand
 	public Syntax getSyntax()
 	{
 		return Syntax.commandSyntax( new int[] {Syntax.NumberType(), Syntax.NumberType(),
-				Syntax.NumberType()} ) ;
+				Syntax.CommandTaskType()} ) ;
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,
@@ -32,7 +33,7 @@ public class ConductorAddToSheet extends DefaultCommand
 	{
 		Sheet[] sheets;
 		int sheet;
-		String cmd;
+		CommandTask cmd;
 		//double[] cargs;
 		int dur;
 		// int i;
@@ -41,8 +42,9 @@ public class ConductorAddToSheet extends DefaultCommand
 		try
 		{
 			sheet= args[0].getIntValue() - 1;
-			cmd= args[2].getString();
 			dur= args[1].getIntValue();
+			cmd= args[2].getCommandTask();
+			
 			/*list= args[2].getList();
 			
 			cargs= new double[list.size() + 1];

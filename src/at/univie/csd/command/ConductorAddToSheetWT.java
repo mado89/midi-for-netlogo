@@ -1,6 +1,7 @@
 package at.univie.csd.command;
 
 import org.nlogo.api.Argument;
+import org.nlogo.api.CommandTask;
 import org.nlogo.api.Context;
 import org.nlogo.api.DefaultCommand;
 import org.nlogo.api.ExtensionException;
@@ -26,7 +27,7 @@ public class ConductorAddToSheetWT extends DefaultCommand
 		int sheet;
 		LogoList list;
 		LogoList cmd; //command
-		String cmds; //command string
+		CommandTask cmdt; //command task
 		String cmdn = null;
 		long tc;
 		
@@ -49,10 +50,11 @@ public class ConductorAddToSheetWT extends DefaultCommand
 				cmd= cmd.butFirst(); //go to command to add
 				
 				//cmds= (String) ((LogoList)cmd.first()).first(); //get command to add
-				cmds= (String) cmd.first(); //get command to add
+				cmdt= (CommandTask) cmd.first(); //get command to add
 				
-				sheets[sheet].addCommand(cmds, tc);
+				sheets[sheet].addCommand(cmdt, tc);
 				
+				//Go to next Command in list
 				list= list.butFirst();
 			}
 			
