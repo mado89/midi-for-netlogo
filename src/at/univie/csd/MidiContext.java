@@ -64,7 +64,7 @@ public class MidiContext
 			m_dev.close();
 		
 		MidiDevice.Info[] infos = MidiSystem.getMidiDeviceInfo();
-		m_dev = MidiSystem.getMidiDevice(infos[0]);
+		m_dev = MidiSystem.getMidiDevice(infos[nr]);
 	}
 
 	/**
