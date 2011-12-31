@@ -1,0 +1,6 @@
+I had troubles on Ubuntu 11.10 running any midi related stuff in NetLogo
+which did the trick was:
+Edit netlogo.sh --> put padsp in front of java ... in the last line
+
+http://www.coderanch.com/t/514755/java/java/Head-First-Java-Chapter-MiniMiniMusicApp
+
