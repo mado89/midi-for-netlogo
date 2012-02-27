@@ -3,7 +3,11 @@ extensions [midi]
 globals [drumming]
 
 to setup
-  clear-all
+  ;; (for this model to work with NetLogo's new plotting features,
+  ;; __clear-all-and-reset-ticks should be replaced with clear-all at
+  ;; the beginning of your setup procedure and reset-ticks at the end
+  ;; of the procedure.)
+  __clear-all-and-reset-ticks
   
   ;; secure, turn all notes off for used channels
   midi:all.notes.off 10
@@ -15,24 +19,24 @@ to setup
   
   set drumming false
   
-  midi:conductor.add.to.sheet 10 10 "midi:noteon 10 45 1"
-  midi:conductor.add.to.sheet 10 200 "midi:noteon 10 45 0.7"
-  midi:conductor.add.to.sheet 10 200 "midi:noteon 10 45 0.7"
-  midi:conductor.add.to.sheet 10 200 "midi:noteon 10 45 0.7"
-  ;midi:conductor.add.to.sheet 10 200 "midi:noteoff 10 45"
+  midi:conductor.add.to.sheet 10 10 task [midi:noteon 10 45 1]
+  midi:conductor.add.to.sheet 10 200 task [midi:noteon 10 45 0.7]
+  midi:conductor.add.to.sheet 10 200 task [midi:noteon 10 45 0.7]
+  midi:conductor.add.to.sheet 10 200 task [midi:noteon 10 45 0.7]
+  ;midi:conductor.add.to.sheet 10 200 task [midi:noteoff 10 45]
   
   if musicians > 1 [
-  midi:conductor.add.to.sheet 11 200 "midi:noteon 11 46  1"
-  midi:conductor.add.to.sheet 11 200 "midi:noteon 11 46  0.7"
-  midi:conductor.add.to.sheet 11 200 "midi:noteon 11 46  0.7"
-  midi:conductor.add.to.sheet 11 200 "midi:noteon 11 46  0.7"
+  midi:conductor.add.to.sheet 11 200 task [midi:noteon 11 46  1]
+  midi:conductor.add.to.sheet 11 200 task [midi:noteon 11 46  0.7]
+  midi:conductor.add.to.sheet 11 200 task [midi:noteon 11 46  0.7]
+  midi:conductor.add.to.sheet 11 200 task [midi:noteon 11 46  0.7]
   ]
   
   if musicians > 2 [
-  midi:conductor.add.to.sheet 12 200 "midi:noteon 12 47 1"
-  midi:conductor.add.to.sheet 12 200 "midi:noteon 12 47 0.7"
-  midi:conductor.add.to.sheet 12 200 "midi:noteon 12 47 0.7"
-  midi:conductor.add.to.sheet 12 200 "midi:noteon 12 47 0.7"
+  midi:conductor.add.to.sheet 12 200 task [midi:noteon 12 47 1]
+  midi:conductor.add.to.sheet 12 200 task [midi:noteon 12 47 0.7]
+  midi:conductor.add.to.sheet 12 200 task [midi:noteon 12 47 0.7]
+  midi:conductor.add.to.sheet 12 200 task [midi:noteon 12 47 0.7]
   ]
   
   ;setup the instruments
@@ -128,6 +132,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
+30.0
 
 BUTTON
 11
@@ -144,6 +149,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 16
@@ -160,6 +166,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 SLIDER
 10
@@ -217,54 +224,49 @@ NIL
 NIL
 NIL
 NIL
+1
 
 @#$#@#$#@
-WHAT IS IT?
------------
-This model demonstrates some basic features of the midi extension.
+## WHAT IS IT?
+
+This model demonstrates some basic features of the midi extension.  
 It demonstrates the use of the conductor feature aswell as the updateposition function
 
+## HOW IT WORKS
 
-HOW IT WORKS
-------------
-Setup function creates a number of turtles depending on the 'musicians' setting. Since there are more turtles created than needed, at the end of the function the useless turtles are removed (hard coded)
-For every musican a seperated sheet is created and the channel set acording to the number of the musician. 
+Setup function creates a number of turtles depending on the 'musicians' setting. Since there are more turtles created than needed, at the end of the function the useless turtles are removed (hard coded)  
+For every musican a seperated sheet is created and the channel set acording to the number of the musician.   
 To have some different percussions channel 11 and 12 are modified using the instrument command. 
 
 In the run procedure the turtles are moved forward. Everytime they are moved forward, midi:updateposition is called and thus a feeling of moving drummers is created. 
 
 The model uses a flag called drumming. This flag is used to determine whetere the conductor is already working or it should be started in the drum routine. 
 
+## HOW TO USE IT
 
-HOW TO USE IT
--------------
-First setup the model with your desired setting for speed and number of drummers. 'inverse dir' means that the drummers whould move in different directions, not only counterclock wise. 
-After that call setup and then press run and 'drum start/stop'. 
+First setup the model with your desired setting for speed and number of drummers. 'inverse dir' means that the drummers whould move in different directions, not only counterclock wise.   
+After that call setup and then press run and 'drum start/stop'.   
 To stop drumming press 'drum start/stop' again. 
 
 
+## THINGS TO NOTICE
 
-THINGS TO NOTICE
-----------------
 You should have the feeling of drummers playing a drum salute while moving around a circle.
 
+## THINGS TO TRY
 
-THINGS TO TRY
--------------
-Try different setting for speed and inverse dir.
+Try different setting for speed and inverse dir.  
 Also try the model with a different number of drummers. 
 
+## EXTENDING THE MODEL
 
-EXTENDING THE MODEL
--------------------
-Once you expand the model to have:
-* An orchestra moving: Compose your own song and setup more musicians to have your own virtual marching band
+Once you expand the model to have:  
+* An orchestra moving: Compose your own song and setup more musicians to have your own virtual marching band  
 * Marching formations: At the moment the drummers only walk around a circle. Try expanding the model to have them walking like a real marching band in contests. 
 
+## NETLOGO FEATURES
 
-NETLOGO FEATURES
-----------------
-This model makes use of the midi extension. 
+This model makes use of the midi extension.   
 Functions used:
  * updateposition
  * conductor: add to sheets, start, stop
@@ -272,14 +274,12 @@ Functions used:
  * instrument
  * all notes off
 
+## RELATED MODELS
 
-RELATED MODELS
---------------
 Also see Rettungsautos, Conductor for usage of the midi extension.
 
+## CREDITS AND REFERENCES
 
-CREDITS AND REFERENCES
-----------------------
 The idea for this model is taken from a class at University of Vienna, by Dr. Erich Neuwirth, who also had the idea of this extension
 @#$#@#$#@
 default
@@ -574,7 +574,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 4.1.3
+NetLogo 5.0RC4
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

@@ -2,29 +2,33 @@
 extensions [midi]
 
 to setup
-  clear-all
+  ;; (for this model to work with NetLogo's new plotting features,
+  ;; __clear-all-and-reset-ticks should be replaced with clear-all at
+  ;; the beginning of your setup procedure and reset-ticks at the end
+  ;; of the procedure.)
+  __clear-all-and-reset-ticks
   midi:conductor.clear.sheets
  
   midi:conductor.add.to.sheet.list 1 [
-  [0 "midi:note 10 45 1 200"]
-  [200 "midi:note 10 45 0.7 200"]
-  [200 "midi:note 10 45 0.7 200"]
-  [200 "midi:note 10 45 0.7 200"]
-  [200 "midi:note 10 45 1 200"]
+  [0 task [midi:note 10 45 1 200]]
+  [200 task [midi:note 10 45 0.7 200]]
+  [200 task [midi:note 10 45 0.7 200]]
+  [200 task [midi:note 10 45 0.7 200]]
+  [200 task [midi:note 10 45 1 200]]
 ]
   midi:conductor.add.to.sheet.list 2 [
-  [200 "midi:pan 10 -0.75"]
-  [200 "midi:pan 10 -0.5"]
-  [200 "midi:pan 10 -0.25"]
-  [200 "midi:pan 10 0"]
+  [200 task [midi:pan 10 -0.75]]
+  [200 task [midi:pan 10 -0.5]]
+  [200 task [midi:pan 10 -0.25]]
+  [200 task [midi:pan 10 0]]
    ]
   
   midi:conductor.add.to.sheet.list 3 [
-  [5 "midi:expression 10 0.75"]
-  [200 "midi:expression 10 0.69"]
-  [200 "midi:expression 10 0.63"]
-  [200 "midi:expression 10 0.56"]
-  [200 "midi:expression 10 0.5"]
+  [5 task [midi:expression 10 0.75]]
+  [200 task [midi:expression 10 0.69]]
+  [200 task [midi:expression 10 0.63]]
+  [200 task [midi:expression 10 0.56]]
+  [200 task [midi:expression 10 0.5]]
    ]
   
   midi:conductor.setplaymode.endless
@@ -63,6 +67,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
+30.0
 
 BUTTON
 71
@@ -79,6 +84,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 81
@@ -95,45 +101,41 @@ NIL
 NIL
 NIL
 NIL
+1
 
 @#$#@#$#@
-WHAT IS IT?
------------
+## WHAT IS IT?
+
 This is just a simple model to show some features of the midi extension.
 
+## HOW IT WORKS
 
-HOW IT WORKS
-------------
-It creates three sheets and adds some midi commands to it.
-First sheet contains notes which are played.
+It creates three sheets and adds some midi commands to it.  
+First sheet contains notes which are played.  
 All effects/midi commands are done on channel 10 which is a channel for percussions, thus no instrument is set for the channel. 
 
-HOW TO USE IT
--------------
-* First press setup
+## HOW TO USE IT
+
+* First press setup  
 * press 'dosmg' (do something)
 
 If you stop run and still hear something (anoying) press setup again
 
+## THINGS TO NOTICE
 
-THINGS TO NOTICE
-----------------
 It should give you the expression of a drummer moving in a circle round the coordinat origin (0/0)
 
+## THINGS TO TRY
 
-THINGS TO TRY
--------------
  tbd
 
+## EXTENDING THE MODEL
 
-EXTENDING THE MODEL
--------------------
 I don't think there is something to extend
 
+## NETLOGO FEATURES
 
-NETLOGO FEATURES
-----------------
-This model makes use of the midi extension. 
+This model makes use of the midi extension.   
 Functions used:
  * conductor: add to sheets, conduct
  * note on
@@ -143,14 +145,12 @@ Functions used:
  * expression
  * pan
 
+## RELATED MODELS
 
-RELATED MODELS
---------------
 Also see Rettungsauto, Trommler for usage of the midi extension
 
+## CREDITS AND REFERENCES
 
-CREDITS AND REFERENCES
-----------------------
 I want to give credit to Dr Erich Neuwirth who had the idea of creating the midi extension
 @#$#@#$#@
 default
@@ -445,7 +445,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 4.1.3
+NetLogo 5.0RC4
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

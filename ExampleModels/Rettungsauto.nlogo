@@ -5,7 +5,11 @@ globals [lasttick velocity lasttime]
 turtles-own[channel]
 
 to setup
-  clear-all
+  ;; (for this model to work with NetLogo's new plotting features,
+  ;; __clear-all-and-reset-ticks should be replaced with clear-all at
+  ;; the beginning of your setup procedure and reset-ticks at the end
+  ;; of the procedure.)
+  __clear-all-and-reset-ticks
   
   midi:conductor.clear.sheets
   midi:all.notes.off 1
@@ -25,10 +29,10 @@ to setup
 end
 
 to make.tatue
-  midi:conductor.add.to.sheet 1 10 "midi:noteon 1 60 1"
-  midi:conductor.add.to.sheet 1 250 "midi:noteoff 1 60"
-  midi:conductor.add.to.sheet 1 10 "midi:noteon 1 65 1"
-  midi:conductor.add.to.sheet 1 250 "midi:noteoff 1 65"
+  midi:conductor.add.to.sheet 1 10  task [midi:noteon 1 60 1]
+  midi:conductor.add.to.sheet 1 250 task [midi:noteoff 1 60]
+  midi:conductor.add.to.sheet 1 10  task [midi:noteon 1 65 1]
+  midi:conductor.add.to.sheet 1 250 task [midi:noteoff 1 65]
   
   midi:instrument 1 57
   
@@ -98,6 +102,7 @@ GRAPHICS-WINDOW
 0
 1
 ticks
+30.0
 
 BUTTON
 11
@@ -114,6 +119,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 SLIDER
 5
@@ -145,6 +151,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 BUTTON
 110
@@ -161,6 +168,7 @@ NIL
 NIL
 NIL
 NIL
+1
 
 INPUTBOX
 7
@@ -185,55 +193,50 @@ StartPos_y
 Number
 
 @#$#@#$#@
-WHAT IS IT?
------------
-This model demonstrates:
-* Dopplereffekt
+## WHAT IS IT?
+
+This model demonstrates:  
+* Dopplereffekt  
 * How to use midi extension (updateposistion, mutliple actors)
 
 Rettungsauto is the german word for ambulance car. In the model an ambulance car from austria is simulated. 
 
+## HOW IT WORKS
 
-HOW IT WORKS
-------------
-In the setup function the turtle is created. The position is set according to StartPos_x and StartPos_y and it will face (0/0). With the function make.tatue, the sound for the turtle is created. 
+In the setup function the turtle is created. The position is set according to StartPos_x and StartPos_y and it will face (0/0). With the function make.tatue, the sound for the turtle is created.   
 The turtle will play the instrument 57, which is a trumpet on channel 1.
 
-runit just asks the conductor to conduct.
-In 'drive' all the functionality for dopplereffekt and driving is done. First the turtle moves forward (according to the speed setting). For having the sound 'moving' the command midi:updatepostion is used. Afterwards some simple calculation for the dopplereffekt is done. Pitchbend is used to modify the tone played. Zero means
+runit just asks the conductor to conduct.  
+In 'drive' all the functionality for dopplereffekt and driving is done. First the turtle moves forward (according to the speed setting). For having the sound 'moving' the command midi:updatepostion is used. Afterwards some simple calculation for the dopplereffekt is done. Pitchbend is used to modify the tone played. Zero means  
 no modification to the tone is done. 
 
+## HOW TO USE IT
 
-HOW TO USE IT
--------------
-* First press setup
-* Pressing drive will let the turtle move
+* First press setup  
+* Pressing drive will let the turtle move  
 * run will turn on the 'music'
 
 If you stop run and still hear something (anoying) press setup again
 
+## THINGS TO NOTICE
 
-THINGS TO NOTICE
-----------------
 Will running the model you should hear how the car is moving and how the tone changes when the car come towards or move from the coordinate-origin (0/0).
 
+## THINGS TO TRY
 
-THINGS TO TRY
--------------
-Try the model with different settings for speed and different starting points.
+Try the model with different settings for speed and different starting points.  
 Everytime you change the starting point his setup-button again.
 
-EXTENDING THE MODEL
--------------------
-* More cars: Implement more cars with different sounds (like police, firebrigade, ...)
-* Obstacles: Randomly place obstacles, the car should avoid them
-* Driving: At the moment the car only drives linear, try implementing more difficult forms of driving like driving a long a sinus curve or something like that. 
+## EXTENDING THE MODEL
+
+* More cars: Implement more cars with different sounds (like police, firebrigade, ...)  
+* Obstacles: Randomly place obstacles, the car should avoid them  
+* Driving: At the moment the car only drives linear, try implementing more difficult forms of driving like driving a long a sinus curve or something like that.   
 * Better dopplereffekt: Read some litreture about Dopplereffekt and try to implement a more realistic form of it. 
 
+## NETLOGO FEATURES
 
-NETLOGO FEATURES
-----------------
-This model makes use of the midi extension. 
+This model makes use of the midi extension.   
 Functions used:
  * updateposition
  * conductor: add to sheets, conduct
@@ -242,14 +245,12 @@ Functions used:
  * pitch bend
  * instrument
 
+## RELATED MODELS
 
-RELATED MODELS
---------------
 Also see Rettungsautos, Trommler for usage of the midi extension
 
+## CREDITS AND REFERENCES
 
-CREDITS AND REFERENCES
-----------------------
 The idea for this model is taken from a class at University of Vienna, by Dr. Erich Neuwirth, who also had the idea of this extension
 @#$#@#$#@
 default
@@ -544,7 +545,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 4.1.3
+NetLogo 5.0RC4
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@

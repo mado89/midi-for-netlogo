@@ -1,6 +1,7 @@
 extensions [midi]
+; extensions [sound]
 
-; globals [lasttick velocity lasttime]
+globals [lasttick velocity lasttime]
 
 turtles-own[channel]
 
@@ -10,15 +11,14 @@ to setup
   ;; the beginning of your setup procedure and reset-ticks at the end
   ;; of the procedure.)
   __clear-all-and-reset-ticks
-  random-seed new-seed
   
   midi:conductor.clear.sheets
   midi:all.notes.off 1
   
-  create-turtles ncars[
+  create-turtles 1[
     set size 10
-    setxy ((random 200) - 100) ((random 200) - 100)
-    facexy ((random 100) - 50) ((random 50) - 25)
+    setxy StartPos_x StartPos_y
+    facexy 0 0
     set channel who + 1
     midi:updateposition channel
   ]
@@ -26,18 +26,16 @@ to setup
   make.tatue
     
   reset-timer
-  ; set lasttime 0
+  set lasttime 0
 end
 
 to make.tatue
-  ask turtles[
-  midi:conductor.add.to.sheet channel 0 + who task [midi:noteon 1 60 1]
-  midi:conductor.add.to.sheet channel 250 task [midi:noteoff 1 60]
-  midi:conductor.add.to.sheet channel 10 task [midi:noteon 1 65 1]
-  midi:conductor.add.to.sheet channel 250 task [midi:noteoff 1 65]
+  midi:conductor.add.to.sheet 1 10  task [midi:noteon 1 60 1]
+  midi:conductor.add.to.sheet 1 250 task [midi:noteoff 1 60]
+  midi:conductor.add.to.sheet 1 10  task [midi:noteon 1 65 1]
+  midi:conductor.add.to.sheet 1 250 task [midi:noteoff 1 65]
   
-  midi:instrument channel 57
-  ]
+  midi:instrument 1 57
   
   midi:conductor.setplaymode.endless
   ;midi:conductor.setplaymode.normal
@@ -50,38 +48,42 @@ to runit
 end
 
 to drive
-  every 0.25 [
-  ask turtles [
-    fd speed * 0.1
+  ask turtle 0 [
+    ifelse timer - lasttime < 2 [
+      fd speed * 0.4 * (timer - lasttime) * (ticks - lasttick) ]
+    [
+      fd speed * 0.4 ]
     
     ; print speed * 0.2 * (ticks - lasttick) * (timer - lasttime)
     ; set velocity ( speed * 0.01 * (ticks - lasttick) )
     
-    every 1 [ midi:updateposition channel]
+    midi:updateposition channel
     
     if xcor < 0 [
-      midi:pitch.bend channel ( 0.7 / min-pxcor * xcor * -1 )
+      midi:pitch.bend channel ( 0.9 / min-pxcor * xcor * -1 )
     ]
     if xcor = 0 [ midi:pitch.bend channel 0]
     if xcor > 0 [
-      midi:pitch.bend channel ( 0.7 / max-pxcor * xcor * -1 )
+      midi:pitch.bend channel ( 0.9 / max-pxcor * xcor * -1 )
     ]
   ]
   
-  ]
-  
-  ; wait 0.0005
+  wait 0.0005
   ; midi:conductor.conduct
   
-  tick  
+  set lasttick ticks
+  set lasttime timer
+  tick
+  
+  
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
 10
-612
+807
 433
-100
+150
 100
 1.95025
 1
@@ -93,8 +95,8 @@ GRAPHICS-WINDOW
 1
 1
 1
--100
-100
+-150
+150
 -100
 100
 0
@@ -127,9 +129,9 @@ SLIDER
 98
 speed
 speed
-1
+0
 100
-60
+100
 1
 1
 NIL
@@ -169,20 +171,27 @@ NIL
 NIL
 1
 
-SLIDER
-12
-225
-184
-258
-ncars
-ncars
+INPUTBOX
+7
+253
+84
+313
+StartPos_x
+-99
 1
-3
-2
+0
+Number
+
+INPUTBOX
+96
+254
+174
+314
+StartPos_y
+0
 1
-1
-NIL
-HORIZONTAL
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -191,39 +200,39 @@ This model demonstrates:
 * Dopplereffekt  
 * How to use midi extension (updateposistion, mutliple actors)
 
-Rettungsauto is the german word for ambulance car. In the model ambulance cars from austria are simulated. 
+Rettungsauto is the german word for ambulance car. In the model an ambulance car from austria is simulated. 
 
 ## HOW IT WORKS
 
-In the setup function turtles are created. For every turtle the sound is created via the  
-function make.tatue. The turtles are positioned randomly on the screen.  
-All turtles will play the same instrument (57 is a trumpet) but own an individual channel.
+In the setup function the turtle is created. The position is set according to StartPos_x and StartPos_y and it will face (0/0). With the function make.tatue, the sound for the turtle is created.   
+The turtle will play the instrument 57, which is a trumpet on channel 1.
 
 runit just asks the conductor to conduct.  
-In 'drive' all the functionality for dopplereffekt and driving is done. First every turtle moves forward (according to the speed setting). For having the sound 'moving' the command midi:updatepostion is used. Afterwards some simple calculation for the dopplereffekt is done. Pitchbend is used to modify the tone played. Zero means  
+In 'drive' all the functionality for dopplereffekt and driving is done. First the turtle moves forward (according to the speed setting). For having the sound 'moving' the command midi:updatepostion is used. Afterwards some simple calculation for the dopplereffekt is done. Pitchbend is used to modify the tone played. Zero means  
 no modification to the tone is done. 
 
 ## HOW TO USE IT
 
 * First press setup  
-* Pressing drive will let the turtles move  
+* Pressing drive will let the turtle move  
 * run will turn on the 'music'
 
 If you stop run and still hear something (anoying) press setup again
 
 ## THINGS TO NOTICE
 
-Will running the model you should hear how the cars are moving and how the tone changes when the cars come towards or move from the coordinate-origin (0/0).
+Will running the model you should hear how the car is moving and how the tone changes when the car come towards or move from the coordinate-origin (0/0).
 
 ## THINGS TO TRY
 
-Try the model with different number of cars and different settings for speed. 
+Try the model with different settings for speed and different starting points.  
+Everytime you change the starting point his setup-button again.
 
 ## EXTENDING THE MODEL
 
 * More cars: Implement more cars with different sounds (like police, firebrigade, ...)  
-* Obstacles: Randomly place obstacles, cars should avoid them  
-* Driving: At the moment cars only drive linear, try implementing more difficult forms of driving like driving a long a sinus curve or something like that.   
+* Obstacles: Randomly place obstacles, the car should avoid them  
+* Driving: At the moment the car only drives linear, try implementing more difficult forms of driving like driving a long a sinus curve or something like that.   
 * Better dopplereffekt: Read some litreture about Dopplereffekt and try to implement a more realistic form of it. 
 
 ## NETLOGO FEATURES
@@ -239,7 +248,7 @@ Functions used:
 
 ## RELATED MODELS
 
-Also see Rettungsaut, Trommler for usage of the midi extension
+Also see Rettungsautos, Trommler for usage of the midi extension
 
 ## CREDITS AND REFERENCES
 
