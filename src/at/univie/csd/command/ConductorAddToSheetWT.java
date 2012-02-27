@@ -1,6 +1,7 @@
 package at.univie.csd.command;
 
 import org.nlogo.api.Argument;
+import org.nlogo.api.CommandTask;
 import org.nlogo.api.Context;
 import org.nlogo.api.DefaultCommand;
 import org.nlogo.api.ExtensionException;
@@ -16,7 +17,7 @@ public class ConductorAddToSheetWT extends DefaultCommand
 {
 	public Syntax getSyntax()
 	{
-		return Syntax.commandSyntax( new int[] {Syntax.TYPE_NUMBER, Syntax.TYPE_LIST } ) ;
+		return Syntax.commandSyntax( new int[] {Syntax.NumberType(), Syntax.ListType() } ) ;
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,
@@ -26,7 +27,7 @@ public class ConductorAddToSheetWT extends DefaultCommand
 		int sheet;
 		LogoList list;
 		LogoList cmd; //command
-		String cmds; //command string
+		CommandTask cmdt; //command task
 		String cmdn = null;
 		long tc;
 		
@@ -48,10 +49,12 @@ public class ConductorAddToSheetWT extends DefaultCommand
 				tc= ((Double) cmd.first()).longValue(); //get Timecode
 				cmd= cmd.butFirst(); //go to command to add
 				
-				cmds= (String) ((LogoList)cmd.first()).first(); //get command to add
+				//cmds= (String) ((LogoList)cmd.first()).first(); //get command to add
+				cmdt= (CommandTask) cmd.first(); //get command to add
 				
-				sheets[sheet].addCommand(cmds, tc);
+				sheets[sheet].addCommand(cmdt, tc);
 				
+				//Go to next Command in list
 				list= list.butFirst();
 			}
 			

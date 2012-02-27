@@ -17,6 +17,7 @@ import at.univie.csd.MidiManager;
 public class ConductorThread extends Thread
 {
 	private Context m_ctx;
+	private final Object[] EMPTY_ARRAY= new Object[0];
 	
 	public ConductorThread(Context ctx)
 	{
@@ -56,7 +57,8 @@ public class ConductorThread extends Thread
 					//throw new ExtensionException( ev.msg );
 					
 					//Runs a Command, and not waits for the command to terminate
-					m_ctx.runCommand(ev.msg, false);
+					// m_ctx.runCommand(ev.msg, false);
+					ev.cmd.perform(m_ctx, EMPTY_ARRAY);
 					// ctx.runCommand(ev.msg, true);
 					
 					//m_recv.send(ev.msg, ev.abstime);

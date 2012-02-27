@@ -24,7 +24,7 @@ public class UpdatePosition extends MidiCommand
 	
 	public Syntax getSyntax()
 	{
-		return Syntax.commandSyntax();
+		return Syntax.commandSyntax(new int[]{Syntax.NumberType()});
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,
@@ -52,7 +52,7 @@ public class UpdatePosition extends MidiCommand
 		t= world.getTurtle(channel);
 		
 		//Debugging
-		/*throw new ExtensionException("Update Position: \n" +
+		/*MidiManager.debug("Update Position: \n" +
 		"x: " + t.xcor() + "\n" +
 		"y: " + t.ycor() + "\n" +
 		"xmin: " + world.minPxcor() + "\n" +
@@ -70,6 +70,7 @@ public class UpdatePosition extends MidiCommand
 		//	MidiManager.debug( "Exception: " + e1.getMessage());
 		//	e1.printStackTrace();
 		//}
+		channel= args[0].getIntValue();
 		
 		if( px > 0 )
 			tpan= world.maxPxcor() / px;

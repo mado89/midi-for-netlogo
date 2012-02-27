@@ -20,7 +20,7 @@ public class AllNotesOff extends MidiCommand
 	
 	public Syntax getSyntax()
 	{
-		return Syntax.commandSyntax(new int[] { Syntax.TYPE_NUMBER });
+		return Syntax.commandSyntax(new int[] { Syntax.NumberType() });
 	}
 	
 	public void perform(Argument[] args, Context ctx) throws ExtensionException,

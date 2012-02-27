@@ -3,6 +3,8 @@
  */
 package at.univie.csd.midi;
 
+import org.nlogo.api.CommandTask;
+
 /**
  * @author Martin Dobiasch
  * Datatype for Events
@@ -17,4 +19,8 @@ public class TimedEvent
 	 * Action to be performed
 	 */
 	public String msg;
+	/**
+	 * Action to be performed
+	 */
+	public CommandTask cmd;
 }
