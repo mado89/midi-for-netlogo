@@ -9,27 +9,27 @@ to setup
   __clear-all-and-reset-ticks
   midi:conductor.clear.sheets
  
-  midi:conductor.add.to.sheet.list 1 [
-  [0 task [midi:note 10 45 1 200]]
-  [200 task [midi:note 10 45 0.7 200]]
-  [200 task [midi:note 10 45 0.7 200]]
-  [200 task [midi:note 10 45 0.7 200]]
-  [200 task [midi:note 10 45 1 200]]
-]
-  midi:conductor.add.to.sheet.list 2 [
-  [200 task [midi:pan 10 -0.75]]
-  [200 task [midi:pan 10 -0.5]]
-  [200 task [midi:pan 10 -0.25]]
-  [200 task [midi:pan 10 0]]
-   ]
+  midi:conductor.add.to.sheet.list 1 (list 
+  (list 0 task [midi:note 10 45 1 200])
+  (list 200 task [midi:note 10 45 0.7 200])
+  (list 200 task [midi:note 10 45 0.7 200])
+  (list 200 task [midi:note 10 45 0.7 200])
+  (list 200 task [midi:note 10 45 1 200]))
+
+  midi:conductor.add.to.sheet.list 2 (list 
+  (list 200 task [midi:pan 10 -0.75])
+  (list 200 task [midi:pan 10 -0.5])
+  (list 200 task [midi:pan 10 -0.25])
+  (list 200 task [midi:pan 10 0])
+  )
   
-  midi:conductor.add.to.sheet.list 3 [
-  [5 task [midi:expression 10 0.75]]
-  [200 task [midi:expression 10 0.69]]
-  [200 task [midi:expression 10 0.63]]
-  [200 task [midi:expression 10 0.56]]
-  [200 task [midi:expression 10 0.5]]
-   ]
+  midi:conductor.add.to.sheet.list 3 (list 
+  (list 5 task [midi:expression 10 0.75])
+  (list 200 task [midi:expression 10 0.69])
+  (list 200 task [midi:expression 10 0.63])
+  (list 200 task [midi:expression 10 0.56])
+  (list 200 task [midi:expression 10 0.5])
+   )
   
   midi:conductor.setplaymode.endless
 
@@ -445,7 +445,7 @@ Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 
 @#$#@#$#@
-NetLogo 5.0RC4
+NetLogo 5.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
